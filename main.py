@@ -31,7 +31,7 @@ def main() -> ():
         from leaderboard import get_leaderboard
         leaderboard = get_leaderboard(args["api_key"], args["leaderboard"])
         for player in leaderboard:
-            print(f"\n{str(player['rank']) + '.': <3} {player['name']}")
+            print(f"\n{str(player['rank']) + '.': <3} {player['name']} ({player['tag']})")
             try:
                 print(f"    {player['clan']['name']}")
             except KeyError:
