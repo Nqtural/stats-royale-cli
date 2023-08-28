@@ -2,12 +2,17 @@ def main() -> ():
     from parse_args import parse_args
     args: dict = parse_args()
 
-    if args["api_key"]:
-        with open("api_key.txt", "w") as keyfile:
-            keyfile.writelines(args["api_key"])
-    else:
-        with open("api_key.txt", "r") as keyfile:
-            args["api_key"] = keyfile.readlines()[0]
+    try:
+        if args["api_key"]:
+            with open("api_key.txt", "w") as keyfile:
+                keyfile.writelines(args["api_key"])
+        else:
+            with open("api_key.txt", "r") as keyfile:
+                args["api_key"] = keyfile.readlines()[0]
+
+    except FileNotFoundError:
+        print("Error: Please provide an API key using '-k' or '--key'")
+        exit()
 
     if args["player_tag"]:
         from stat_check import get_player_info
