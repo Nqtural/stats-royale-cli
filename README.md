@@ -8,3 +8,5 @@ git clone https://github.com/Nqtural/stats-royale-cli
 cd stats-royale-cli
 python main.py -h
 ```
+### Acquire API key
+To acquire an API key, go to [https://developer.clashroyale.com/#/register](https://developer.clashroyale.com/#/register) and create an account. Head to [https://developer.clashroyale.com/#/ and log in and go to ](https://developer.clashroyale.com/#/account), log in, and create a new key.
