@@ -1,4 +1,4 @@
-def get_leaderboard(api_key: str) -> list:
+def get_leaderboard(api_key: str, number_of_spots: int) -> list:
     from request import make_request
 
     latest_season = make_request(
@@ -7,6 +7,6 @@ def get_leaderboard(api_key: str) -> list:
     )["items"][-1]["uniqueId"]
 
     return make_request(
-        f"https://api.clashroyale.com/v1/locations/global/pathoflegend/{latest_season}/rankings/players?limit=10",
+        f"https://api.clashroyale.com/v1/locations/global/pathoflegend/{latest_season}/rankings/players?limit={number_of_spots}",
         api_key
     )["items"]

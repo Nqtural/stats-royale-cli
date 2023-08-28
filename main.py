@@ -1,9 +1,17 @@
+def leaderboard_range(value):
+    ivalue = int(value)
+    if ivalue <= 1 or ivalue > 2147483647:
+        print("'-l' must be between 0 and 2147483647.")
+        exit()
+    return ivalue
+
+
 def parse_args() -> dict:
     import argparse
 
     parser = argparse.ArgumentParser(
-        prog="Stats Royale CLI",
-        description="Fetches statistics about Clash Royale from the terminal"
+        prog = "Stats Royale CLI",
+        description = "Fetches statistics about Clash Royale from the terminal"
     )
 
     type_of_request = parser.add_mutually_exclusive_group(required=True)
@@ -20,8 +28,10 @@ def parse_args() -> dict:
 
     type_of_request.add_argument(
         "-l", "--leaderboard",
-        help = "Display last seasons Path of Legends leaderboard (top 10)",
-        action = "store_true"
+        nargs = "?",
+        const = 10,
+        type = leaderboard_range,
+        help = "Display last seasons Path of Legends leaderboard (default amount of spots: 10)"
     )
 
     args = parser.parse_args()
@@ -63,7 +73,7 @@ def main() -> ():
 
     elif args["leaderboard"]:
         from leaderboard import get_leaderboard
-        leaderboard = get_leaderboard(args["api_key"])
+        leaderboard = get_leaderboard(args["api_key"], args["leaderboard"])
         for player in leaderboard:
             print(f"\n{str(player['rank']) + '.': <3} {player['name']}")
             try:
